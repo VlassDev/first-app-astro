@@ -1,0 +1,56 @@
+---
+const currentPath = Astro.url.pathname;
+const isAboutDisabled = true 
+const isPoliticsDisabled = true 
+import blocarLogo from '../assets/images/blocar-logo.png';
+
+---
+
+<style>
+  .active {
+    border-bottom: 1px gray solid;
+  }
+</style>
+
+<nav class="navbar navbar-expand-lg shadow-sm">
+  <div class="px-5 container-fluid">
+    <a class="navbar-brand" href="/">
+      <img src={blocarLogo.src} width="115" height="48" alt="Astro Homepage" />
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarText"
+      aria-controls="navbarText"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <div class="navbar-nav me-auto mb-2 mb-lg-0">
+      </div>
+
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-4">
+        <li class="nav-item">
+          <a class={`nav-link ${currentPath === '/' ? 'active' : ''}`} href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class={`nav-link ${currentPath === '/blog' ? 'active' : ''}`} href="/blog">Blog</a>
+        </li>
+        <li class="nav-item">
+          <a class={`nav-link ${currentPath === '/about' ? 'active' : ''} ${isAboutDisabled ? 'disabled' : ''}`}  href={isAboutDisabled ? '#' : '/about'}>About</a>
+        </li>
+        <li class="nav-item">
+          <a class={`nav-link ${currentPath === '/politics' ? 'active' : ''} ${isPoliticsDisabled ? 'disabled' : ''}`}  href={isPoliticsDisabled ? '#' : '/politics'}>Politics</a>
+        </li>
+      </ul>
+
+      <div>
+      <button type="button" class="btn btn-outline-secondary">Log in</button>
+      <button type="button" class="btn btn-secondary">Register</button>
+      </div>
+    </div>
+  </div>
+</nav>
