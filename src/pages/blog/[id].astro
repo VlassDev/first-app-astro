@@ -1,0 +1,65 @@
+---
+import Layout from "../../layouts/Layout.astro"
+const {id} = Astro.params;
+
+import Bloggeneral from "../../data/bloggeneral.json"
+import Blog from "../../data/blogs.json"
+import Navbar from "../../components/Navbar.astro";
+import Breadcrumb from "../../components/Breadcrumb.astro";
+import noImagen  from '../../assets/not_description.png'
+
+const blogCar: any = Bloggeneral.find(card => card.id === Number(id));
+const blogList: any = Blog.find(card => card.id === Number(id));
+---
+
+
+<Layout title={blogCar?.title || "Card no encontrada"}>
+  <Navbar />
+    <Breadcrumb />
+
+    <div class="container">
+
+        <div class="mt-5 mb-4">
+            {blogList ? (
+                <div class="d-flex flex-column">
+                    <h5> Autor: {blogList.author} </h5> 
+                    <h6> Fecha de publicación: {blogList.date} </h6> 
+                    <span> {blogList.time} </span> 
+                </div>
+            ) : (
+              <p>Blog no encontrada.</p>
+            )}
+        </div>
+
+        {blogCar ? (
+          <>
+            <h1>{blogCar?.title}</h1>
+            <p>{blogCar?.description}</p>
+            <div class="d-flex flex-column">
+                {blogCar.content?.map((blog: any) => (
+                <section class="row mt-5">
+                    <div class="col">
+                        <h3>{blog.title}</h3>
+                        <p>{blog.description}</p>
+                    </div>
+                    {blog?.imageUrl && (
+                        <div class="col">
+                            <img
+                            src={blog.imageUrl}
+                            alt={blog.altText || 'Imagen del blog'}
+                            width="300px"
+                            />
+                        </div>
+                    )}
+                </section>
+              ))}
+            </div>
+          </>
+        ) : (
+          <div class="d-flex flex-column align-items-center">
+            <p class="text-danger">Aún no hay descripción</p>
+            <img src={noImagen.src} alt="no hay imagen" width="300px"/>
+          </div>
+        )}
+    </div>
+</Layout>

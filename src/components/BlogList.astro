@@ -12,14 +12,11 @@ import blogs from '../data/blogs.json';
 }
 </style>
 
-<div class="container">
-
 <section class="container py-5">
     <h2 class="mb-4">New Blogs</h2>
-  
     <div class="row">
       {blogs.map(blog => (
-        <div class="col-md-6 col-lg-3 mb-4">
+        <div class="col-md-6 col-lg-3 mb-5">
           <div class="rounded h-100">
             <img src={blog.image} class="card-img-top rounded" alt={blog.title} />
             <div class="card-body">
@@ -33,12 +30,13 @@ import blogs from '../data/blogs.json';
             <div class="card-footer d-flex flex-row justify-content-start mt-2">
               <p> Publicado por {blog.author} </p>
             </div>
+            <a href={`/blog/${blog.id}`}>
+              <button class="btn btn-outline-primary w-100"> Leer artículo  </button>
+            </a>
           </div>
         </div>
       ))}
     </div>
-
-
   </section>
 
 
